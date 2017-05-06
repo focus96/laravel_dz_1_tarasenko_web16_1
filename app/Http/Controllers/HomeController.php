@@ -13,7 +13,7 @@ class HomeController extends Controller {
      * @return void
      */
     public function __construct() {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -22,12 +22,8 @@ class HomeController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $user = User::first();
-        $user->news()->create([
-            'title' => 'Hello world!',
-            'content' => '# Hello world content!!!'
-        ]);
-        //return view('home');
+        
+        return view('home');
     }
 
 }
