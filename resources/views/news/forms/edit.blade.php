@@ -4,7 +4,7 @@
     <div class="row"> 
         <div class="col-md-8 col-md-offset-2"> 
             <div class="panel panel-default"> 
-                <div class="panel-heading"><strong>Редактирование товара</strong></div> 
+                <div class="panel-heading"><strong>Редактирование новости</strong></div> 
                 <div class="panel-body"> 
                     <form class="form-horizontal" method="POST" action="{{url('news/update')}}"> 
                         {{--{{method_field('PUT')}}--}} 

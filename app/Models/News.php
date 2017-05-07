@@ -20,6 +20,7 @@ class News extends Model {
         return $this->belongsTo(User::class);
     }
 
+    // генерируем slag
     public function setTitleAttribute($value) {
         $this->attributes['title'] = $value;
         $this->attributes['slug'] = str_slug($value);

@@ -15,8 +15,6 @@ class NewsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        //
-
         $news = News::all();
         return view('news.index', ['news' => $news]);
     }
@@ -27,7 +25,6 @@ class NewsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        //
         return view('news.forms.create');
     }
 
@@ -49,8 +46,9 @@ class NewsController extends Controller {
      * @param  \App\Models\News  $news
      * @return \Illuminate\Http\Response
      */
-    public function show(News $news) {
-        //
+    public function show($id) {
+        $news = News::find($id);
+        return view('news.show', compact('news'));
     }
 
     /**
@@ -86,7 +84,6 @@ class NewsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        //
         $news = News::find($id);
         $news->delete();
         return redirect('news');

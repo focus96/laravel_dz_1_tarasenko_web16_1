@@ -17,7 +17,7 @@ class AccessModeratorRoleMiddleware
     public function handle($request, Closure $next)
     {
         $role = Auth::user()->roles()->value("slug");
-        if($role == 'moderator'){
+        if($role !== 'moderator'){
             //abort(403, 'Unauthorized action.');
             return redirect('news');
         }

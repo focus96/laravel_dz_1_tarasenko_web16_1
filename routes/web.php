@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::middleware('auth')->resource('news','NewsController');
 
 Route::post('/news/store', [
@@ -42,4 +43,8 @@ Route::get('/news/edit/{id}', [
 Route::post('/news/update', [
     'uses' => 'NewsController@update',
     'middleware' => 'accessRoleModerator',
+]);
+
+Route::get('/news/show/{id}', [
+    'uses' => 'NewsController@show',
 ]);

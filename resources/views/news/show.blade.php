@@ -4,17 +4,18 @@
     <div class="row"> 
         <div class="col-md-8 col-md-offset-2"> 
             <div class="panel panel-default"> 
-                <div class="panel-heading"><h1>Новости</h1>  <a href="news/create">Добавить новость</a></div> 
+                <a href="{{url('news')}}"><<Назад</a>
+                <div class="panel-heading"><h1>{!! $news->title !!}</h1></div> 
                 <div class="panel-body"> 
-                    @foreach($news as $n)
-                    <h1><a href="news/show/{{$n->id}}">{!! $n->title !!}</a></h1>
-                    <p>{!! $n->markdownContent !!}</p>
+                    
+                    <p>{!! $news->markdownContent !!}</p>
                     
                     <div>
-                        <p>{{$n->created_at}}</p>
+                        <p>{{$news->created_at}}</p>
                     </div>
+                    <a href="{{url("news/destroy/".$news->id)}}">Delete</a>
+                    <a href="{{url("news/edit/".$news->id)}}">Edit</a>
                     <hr>
-                    @endforeach
                 </div> 
             </div> 
         </div> 
