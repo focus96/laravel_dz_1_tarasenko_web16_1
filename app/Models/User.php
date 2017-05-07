@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
+
     use Notifiable;
 
     /**
@@ -26,7 +26,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    
+
     /**
      * Связь с таблицей ролей
      * @return type Model roles
@@ -34,7 +34,7 @@ class User extends Authenticatable
     public function roles() {
         return $this->belongsToMany(Role::class);
     }
-    
+
     /**
      * Связь с таблицей новостей
      * @return type Model news

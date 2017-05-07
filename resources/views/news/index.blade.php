@@ -7,10 +7,13 @@
                 <div class="panel-heading"><strong>Добавление товара</strong></div> 
                 <div class="panel-body"> 
                     @foreach($news as $n)
-                    <p>{!! $n->title !!}</p>
+                    <h1>{!! $n->title !!}</h1>
                     <p>{!! $n->markdownContent !!}</p>
                     
-                    <a href="news/destroy/{{$n->id}}">X</a>
+                    <div>
+                        <p>{{$n->created_at}}</p>
+                    </div>
+                    <a href="news/destroy/{{$n->id}}">Delete</a>
                     <a href="news/edit/{{$n->id}}">Edit</a>
                     <hr>
                     @endforeach
