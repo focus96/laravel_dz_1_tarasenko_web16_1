@@ -70,10 +70,12 @@ class NewsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(NewsRequest $request, News $news) {
-        // $news = News::find($request->id); Уже существует!
-        // $news->title = $request->input('title');
-        // $news->content = $request->input('content');
-        $news->update($request->all());
+        $news = News::find($request->id); //Уже существует!
+        $news->title = $request->input('title');
+        $news->content = $request->input('content');
+
+        $news->update();
+        //$news->update($request->all());
         return redirect('news');
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\News;
 
 class NewsRequest extends FormRequest {
 
@@ -91,7 +92,7 @@ class NewsRequest extends FormRequest {
      */
     public function validateUpdate() {
         return [
-            'title'   => 'required|unique:news,title,' . request()->news->id,
+            'title'   => 'required|unique:news,title,' . request()->id,
             'content' => 'required|max:10',
         ];
     }
