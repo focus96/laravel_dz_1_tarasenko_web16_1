@@ -13,7 +13,7 @@ class NewsRequest extends FormRequest {
      * @var array
      */
     protected $allowedMethods = [
-        'store'  => ['post'],
+        'store' => ['post'],
         'update' => ['put', 'patch']
     ];
 
@@ -29,14 +29,13 @@ class NewsRequest extends FormRequest {
      *
      * @return bool
      */
-    public function authorize() {  
+    public function authorize() {
 
         if (in_array($this->currentMethod, $this->allowedMethods['store'])) {
             return $this->authorizeStore();
         } else if (in_array($this->currentMethod, $this->allowedMethods['update'])) {
             return $this->authorizeUpdate();
         }
-
     }
 
     /**
@@ -69,8 +68,9 @@ class NewsRequest extends FormRequest {
      * @return boolean
      */
     public function authorizeUpdate() {
-        return News::where('id', request()->id)
-                        ->where('user_id', auth()->id())->exists();
+        (News::where('id', request()->id)
+                        ->where('user_id', auth()->id())->exists()) ? true : abort(403);
+        return true;
     }
 
     /**
@@ -80,7 +80,7 @@ class NewsRequest extends FormRequest {
      */
     public function validateStore() {
         return [
-            'title'   => 'required|unique:news', // не забываем проверять на уникальность
+            'title' => 'required|unique:news', // не забываем проверять на уникальность
             'content' => 'required|max:10',
         ];
     }
@@ -92,7 +92,7 @@ class NewsRequest extends FormRequest {
      */
     public function validateUpdate() {
         return [
-            'title'   => 'required|unique:news,title,' . request()->id,
+            'title' => 'required|unique:news,title,' . request()->id,
             'content' => 'required|max:10',
         ];
     }

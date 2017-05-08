@@ -70,12 +70,16 @@ class NewsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(NewsRequest $request, News $news) {
+        // Old variant
         $news = News::find($request->id); //Уже существует!
         $news->title = $request->input('title');
         $news->content = $request->input('content');
-
         $news->update();
+        // END old variant
+        
+        // New variant - не записывает обновления
         //$news->update($request->all());
+        
         return redirect('news');
     }
 
@@ -86,8 +90,6 @@ class NewsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        //$news = News::find($id);
-        //$news->delete();
         News::destroy($id);
         return redirect('news');
     }
