@@ -16,9 +16,19 @@ class NewsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $news = Cache::remember('news', 60, function () {
-                    return News::all();
-                });
+        //Если кешировать запрoсы выборки новостей,
+        //то при добавлении или удалении какой-то записи
+        //придется перезаписывать кеш для всех страниц.
+        //Ладно когда у меня 3 страницы, а когда их будет 100
+        //или 1000, 10000...
+        //На данный момент кеширование работает при выборке всех
+        //новостей. Без пагинации все работало без сбоев.
+        //
+        //$news = Cache::remember('news', 1, function () {
+        //            return News::all();
+        //        });
+        
+        $news = News::paginate(5);
         return view('news.index', ['news' => $news]);
     }
 
