@@ -7,7 +7,6 @@
                 <a href="{{url('news')}}"><<Назад</a>
                 <div class="panel-heading"><h1>{!! $news->title !!}</h1></div> 
                 <div class="panel-body"> 
-                    
                     <p>{!! $news->markdownContent !!}</p>
                     
                     <div>

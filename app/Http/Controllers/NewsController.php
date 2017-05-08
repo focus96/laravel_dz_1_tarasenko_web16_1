@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\News;
 use Auth;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreNewsRequest;
+use App\Http\Requests\NewsRequest;
 
 class NewsController extends Controller {
 
@@ -34,7 +34,7 @@ class NewsController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreNewsRequest $request) {
+    public function store(NewsRequest $request) {
         $user = Auth::user();
         $user->news()->create($request->all());
         return redirect('news');
@@ -69,7 +69,7 @@ class NewsController extends Controller {
      * @param  \App\Models\News  $news
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreNewsRequest $request, News $news) {
+    public function update(NewsRequest $request, News $news) {
         // $news = News::find($request->id); Уже существует!
         // $news->title = $request->input('title');
         // $news->content = $request->input('content');
