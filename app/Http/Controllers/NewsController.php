@@ -16,7 +16,6 @@ class NewsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        //$news = News::all();
         $news = Cache::remember('news', 60, function () {
                     return News::all();
                 });
