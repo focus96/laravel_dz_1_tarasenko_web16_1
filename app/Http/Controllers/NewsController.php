@@ -70,10 +70,10 @@ class NewsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(StoreNewsRequest $request, News $news) {
-        $news = News::find($request->id);
-        $news->title = $request->input('title');
-        $news->content = $request->input('content');
-        $news->update();
+        // $news = News::find($request->id); Уже существует!
+        // $news->title = $request->input('title');
+        // $news->content = $request->input('content');
+        $news->update($request->all());
         return redirect('news');
     }
 
@@ -84,8 +84,9 @@ class NewsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $news = News::find($id);
-        $news->delete();
+        //$news = News::find($id);
+        //$news->delete();
+        News::destroy($id);
         return redirect('news');
     }
 

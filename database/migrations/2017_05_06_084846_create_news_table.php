@@ -12,8 +12,8 @@ class CreateNewsTable extends Migration
      * @return void
      */
     public function up()
-    {
-        try {
+    {   
+        //try {
             Schema::create('news', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('user_id')->unsigned();
@@ -26,10 +26,11 @@ class CreateNewsTable extends Migration
                         ->onDelete('cascade')
                         ->onUpdate('cascade');
             });
-        } catch (\Exception $e) {
-            $this->down();
-            throw $e;
-        }
+        //} catch (\Exception $e) {
+        //    $this->down();
+        //    throw $e;
+        //}
+        // Не обязательно оборачивать в try..catch, если у тебя создается одна таблица
     }
 
     /**
