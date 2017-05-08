@@ -13,7 +13,7 @@
                             <label for="name" class="col-md-4 control-label">Заголовок</label> 
 
                             <div class="col-md-6"> 
-                                <input id="name" type="text" class="form-control" name="title" value="{{$news->title}}" required autofocus> 
+                                <input id="title" type="text" class="form-control" name="title" value="{{$news->title}}" required autofocus> 
                                 @if ($errors->has('title')) 
                                 <span class="help-block"> 
                                     <strong>{{ $errors->first('title') }}</strong> 
