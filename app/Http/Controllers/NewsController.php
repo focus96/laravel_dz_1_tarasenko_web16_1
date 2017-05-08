@@ -24,11 +24,11 @@ class NewsController extends Controller {
         //На данный момент кеширование работает при выборке всех
         //новостей. Без пагинации все работало без сбоев.
         //
-        //$news = Cache::remember('news', 1, function () {
+        //$news = Cache::remember('news', 60, function () {
         //            return News::all();
         //        });
         
-        $news = News::paginate(5);
+        $news = News::paginate(10);
         return view('news.index', ['news' => $news]);
     }
 
