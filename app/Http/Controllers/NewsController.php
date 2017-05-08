@@ -6,6 +6,7 @@ use App\Models\News;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\NewsRequest;
+use Illuminate\Support\Facades\Cache;
 
 class NewsController extends Controller {
 
@@ -15,7 +16,10 @@ class NewsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $news = News::all();
+        //$news = News::all();
+        $news = Cache::remember('news', 60, function () {
+                    return News::all();
+                });
         return view('news.index', ['news' => $news]);
     }
 
@@ -76,10 +80,9 @@ class NewsController extends Controller {
         $news->content = $request->input('content');
         $news->update();
         // END old variant
-        
         // New variant - не записывает обновления
         //$news->update($request->all());
-        
+
         return redirect('news');
     }
 
