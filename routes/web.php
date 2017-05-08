@@ -47,10 +47,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'news', 'middleware' => ['auth']], function () {
     Route::get('/', 'NewsController@index')->name('news');
-    Route::get('/create', 'NewsController@create')->name('news.create');
+    Route::get('/create', 'NewsController@create')->name('news.create')->middleware('accessRoleModerator');
     Route::get('/show/{id}', 'NewsController@show')->name('news.show');
-    Route::get('/edit/{id}', 'NewsController@edit')->name('news.edit');
-    Route::delete('/destroy/{id}', 'NewsController@destroy')->name('news.destroy');
-    Route::post('/store', 'NewsController@store')->name('news.store');
-    Route::put('/update', 'NewsController@update')->name('news.update');
+    Route::get('/edit/{id}', 'NewsController@edit')->name('news.edit')->middleware('accessRoleModerator');
+    Route::delete('/destroy/{id}', 'NewsController@destroy')->name('news.destroy')->middleware('accessRoleAdmin');
+    Route::post('/store', 'NewsController@store')->name('news.store')->middleware('accessRoleModerator');
+    Route::put('/update', 'NewsController@update')->name('news.update')->middleware('accessRoleModerator');
 });
