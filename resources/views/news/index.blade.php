@@ -21,24 +21,24 @@
 
                 </div> 
                 <div class="panel-body"> 
-                    @foreach($news as $n)
+                    @foreach($news as $item)
                     <h1>
                         <!-- Link news/show -->
-                        <a href="{{ route('news.show', $n->id) }}"
+                        <a href="{{ route('news.show', $item->id) }}"
                            onclick="event.preventDefault();
-                                   document.getElementById('show-form<?php echo $n->id;?>').submit();">
-                            {{ $n->title }}
+                                   document.getElementById('show-form<?php echo $item->id;?>').submit();">
+                            {{ $item->title }}
                         </a>
 
-                        <form id="show-form{{$n->id}}" action="{{ route('news.show', $n->id) }}" method="GET" style="display: none;">
+                        <form id="show-form{{$item->id}}" action="{{ route('news.show', $item->id) }}" method="GET" style="display: none;">
                             {{ csrf_field() }}
                         </form>
                         <!-- END Link news/show -->
                     </h1>
-                    <p>{!! $n->markdownContent !!}</p>
+                    <p>{!! $item->markdownContent !!}</p>
 
                     <div>
-                        <p>{{$n->created_at}}</p>
+                        <p>{{$item->created_at}}</p>
                     </div>
                     <hr>
                     @endforeach

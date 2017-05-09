@@ -18,7 +18,7 @@ class AccessAdminRoleMiddleware
     {
         $role = Auth::user()->roles()->value("slug");
         if($role !== 'admin'){
-            //abort(403, 'Unauthorized action.');
+            abort(403, 'Unauthorized action.');
             return redirect('news');
         }
         return $next($request);
