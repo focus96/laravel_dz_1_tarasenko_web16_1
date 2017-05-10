@@ -24,6 +24,7 @@ class NewsController extends Controller {
         $news = News::select(
                         DB::raw('substr(content, 1, 300) as content, '
                                 . 'id, title, slug, created_at, updated_at'))
+                ->orderBy('created_at', 'desk')
                 ->paginate(10);
 
         return view('news.index', ['news' => $news]);
