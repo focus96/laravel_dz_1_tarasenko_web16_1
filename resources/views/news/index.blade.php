@@ -26,7 +26,7 @@
                         <!-- Link news/show -->
                         <a href="{{ route('news.show', $item->id) }}"
                            onclick="event.preventDefault();
-                                   document.getElementById('show-form<?php echo $item->id;?>').submit();">
+                                   document.getElementById('show-form'+{{$item->id}}).submit();">
                             {{ $item->title }}
                         </a>
 
