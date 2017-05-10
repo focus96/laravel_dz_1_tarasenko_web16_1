@@ -28,7 +28,7 @@ $factory->define(App\Models\News::class, function (Faker\Generator $faker) {
 
     return [
         'title' => $faker->sentence,
-        'content' => $faker->realText(500),
+        'content' => $faker->realText(3000, 4),
         //'user_id' => factory(App\Models\User::class)->create()->id,
         'user_id' => App\Models\User::all()->random()->id,
     ];

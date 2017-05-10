@@ -7,6 +7,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\NewsRequest;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller {
 
@@ -16,19 +17,15 @@ class NewsController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        //Если кешировать запрoсы выборки новостей,
-        //то при добавлении или удалении какой-то записи
-        //придется перезаписывать кеш для всех страниц.
-        //Ладно когда у меня 3 страницы, а когда их будет 100
-        //или 1000, 10000...
-        //На данный момент кеширование работает при выборке всех
-        //новостей. Без пагинации все работало без сбоев.
-        //
         //$news = Cache::remember('news', 60, function () {
         //            return News::all();
         //        });
-        
-        $news = News::paginate(10);
+
+        $news = News::select(
+                        DB::raw('substr(content, 1, 300) as content, '
+                                . 'id, title, slug, created_at, updated_at'))
+                ->paginate(10);
+
         return view('news.index', ['news' => $news]);
     }
 

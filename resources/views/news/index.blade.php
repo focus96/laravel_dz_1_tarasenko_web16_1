@@ -35,7 +35,7 @@
                         </form>
                         <!-- END Link news/show -->
                     </h1>
-                    <p>{!! $item->markdownContent !!}</p>
+                    <p>{!! $item->markdownContent !!}...</p>
 
                     <div>
                         <p>{{$item->created_at}}</p>
