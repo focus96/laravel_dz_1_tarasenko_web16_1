@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Parsedown;
+use Illuminate\Support\Facades\DB;
 
 class News extends Model {
 
@@ -34,6 +35,26 @@ class News extends Model {
     // преобразуем markdown в html
     public function getMarkdownContentAttribute() {
         return (new Parsedown)->text($this->attributes['content']);
+    }
+
+    /**
+     * Получаем ... 
+     * 
+     * @param type $query
+     * @return type
+     */
+    public function scopePartialContent($query) {
+        $cols = [
+            'substr(content, 1, 300) as content',
+            'id',
+            'title',
+            'slug',
+            'created_at',
+            'updated_at',
+        ];
+        return $query->select(
+                DB::raw(implode(',', $cols)))
+                        ->orderBy('created_at', 'desk');
     }
 
 }

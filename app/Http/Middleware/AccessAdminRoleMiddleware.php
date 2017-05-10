@@ -16,6 +16,7 @@ class AccessAdminRoleMiddleware
      */
     public function handle($request, Closure $next)
     {
+        dd($next);
         $role = Auth::user()->roles()->value("slug");
         if($role !== 'admin'){
             abort(403, 'Unauthorized action.');

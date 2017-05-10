@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\User;
+
 
 class DatabaseSeeder extends Seeder {
 
@@ -44,7 +46,11 @@ class DatabaseSeeder extends Seeder {
                     'password' => bcrypt('1234'),
                     'remember_token' => str_random(10),
         ])->roles()->sync([$roles[0]->id]);
-
+        
+        factory(User::class, 1)->create([
+            'email' => 'admin@admin.ru',
+        ])->first()->roles()->sync([$roles[0]->id]);
+        
         /**
          * Create moderator with my password
          */
@@ -53,13 +59,19 @@ class DatabaseSeeder extends Seeder {
                     'email' => 'mod@mod.ru',
                     'password' => bcrypt('1234'),
                     'remember_token' => str_random(10),
-        ])->roles()->sync([$roles[1]->id]);
-
+        ])->roles()->sync([$roles[1]->id, $roles[0]->id]);
+        
+        // 1 2 3 4 5
+        // sync([2,3])
+        // 2 3
+        // sync([1,4,5], false)
+        // 1 4 5 2 3
+        
         /**
          * Creating users with different roles.
          */
         factory('App\Models\User')->create()
-                ->roles()->sync([$roles[0]->id, $roles[1]->id, $roles[2]->id]);
+                ->roles()->sync($roles->pluck('id')->random(3)->toArray());
         factory('App\Models\User')->create()
                 ->roles()->sync([$roles[0]->id, $roles[1]->id]);
         factory('App\Models\User')->create()
@@ -76,7 +88,7 @@ class DatabaseSeeder extends Seeder {
         /**
          * Create 100 news.
          */
-        factory('App\Models\News', 100)->create();
+        factory(App\Models\News::class, 100)->create();
     }
 
 }

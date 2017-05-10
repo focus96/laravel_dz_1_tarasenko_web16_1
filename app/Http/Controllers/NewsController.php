@@ -7,9 +7,17 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\NewsRequest;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller {
+
+    public function __construct() {
+        $this->middleware('gate:moderator', [
+            'only' => ['create', 'edit', 'store', 'update']
+        ]);
+        $this->middleware('gate:admin', [
+            'only' => ['destroy']
+        ]);
+    }
 
     /**
      * Display a listing of the resource.
@@ -21,12 +29,7 @@ class NewsController extends Controller {
         //            return News::all();
         //        });
 
-        $news = News::select(
-                        DB::raw('substr(content, 1, 300) as content, '
-                                . 'id, title, slug, created_at, updated_at'))
-                ->orderBy('created_at', 'desk')
-                ->paginate(10);
-
+        $news = News::partialContent()->paginate(10);
         return view('news.index', ['news' => $news]);
     }
 
@@ -88,7 +91,8 @@ class NewsController extends Controller {
         $news->update();
         // END old variant
         // New variant - не записывает обновления
-        //$news->update($request->all());
+//        dd($request);
+//        $news->update($request->all());
 
         return redirect('news');
     }
@@ -99,8 +103,8 @@ class NewsController extends Controller {
      * @param  \App\Models\News  $news
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
-        News::destroy($id);
+    public function destroy(News $news) {
+        News::destroy($news->id);
         return redirect('news');
     }
 

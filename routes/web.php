@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Route::middleware('auth')->resource('news','NewsController');
+Route::middleware('auth')->resource('news','NewsController');
 //Route::post('/news/store', [
 //    'uses' => 'NewsController@store',
 //    'middleware' => 'accessRoleModerator',
@@ -45,12 +45,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 //    'uses' => 'NewsController@show',
 //]);
 
-Route::group(['prefix' => 'news', 'middleware' => ['auth']], function () {
-    Route::get('/', 'NewsController@index')->name('news');
-    Route::get('/create', 'NewsController@create')->name('news.create')->middleware('accessRoleModerator');
-    Route::get('/show/{id}', 'NewsController@show')->name('news.show');
-    Route::get('/edit/{id}', 'NewsController@edit')->name('news.edit')->middleware('accessRoleModerator');
-    Route::delete('/destroy/{id}', 'NewsController@destroy')->name('news.destroy')->middleware('accessRoleAdmin');
-    Route::post('/store', 'NewsController@store')->name('news.store')->middleware('accessRoleModerator');
-    Route::put('/update', 'NewsController@update')->name('news.update')->middleware('accessRoleModerator');
-});
+//Route::group(['prefix' => 'news', 'middleware' => ['auth']], function () {
+//    Route::get('/', 'NewsController@index')->name('news');
+//    Route::get('/create', 'NewsController@create')->name('news.create')->middleware('accessRoleModerator');
+//    Route::get('/show/{id}', 'NewsController@show')->name('news.show');
+//    Route::get('/edit/{id}', 'NewsController@edit')->name('news.edit')->middleware('accessRoleModerator');
+//    Route::delete('/destroy/{id}', 'NewsController@destroy')->name('news.destroy')->middleware('accessRoleAdmin');
+//    Route::post('/store', 'NewsController@store')->name('news.store')->middleware('accessRoleModerator');
+//    Route::put('/update', 'NewsController@update')->name('news.update')->middleware('accessRoleModerator');
+//});
