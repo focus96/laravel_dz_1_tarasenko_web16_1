@@ -7,15 +7,15 @@ use App\Models\News;
 use Auth;
 use Illuminate\Support\Facades\Cache;
 
-
-class NewsController extends Controller {
-
-    public function __construct() {
+class NewsController extends Controller
+{
+    public function __construct()
+    {
         $this->middleware('gate:moderator', [
-            'only' => ['create', 'edit', 'store', 'update']
+            'only' => ['create', 'edit', 'store', 'update'],
         ]);
         $this->middleware('gate:admin', [
-            'only' => ['destroy']
+            'only' => ['destroy'],
         ]);
     }
 
@@ -118,8 +118,8 @@ class NewsController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function destroy(News $news) {
+    public function destroy(News $news)
+    {
         News::destroy($news->id);
 
         return redirect('news');

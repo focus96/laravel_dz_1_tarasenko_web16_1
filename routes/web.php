@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::middleware('auth')->resource('news','NewsController');
+Route::middleware('auth')->resource('news', 'NewsController');
 //Route::post('/news/store', [
 //    'uses' => 'NewsController@store',
 //    'middleware' => 'accessRoleModerator',

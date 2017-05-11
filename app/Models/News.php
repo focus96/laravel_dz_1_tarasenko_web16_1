@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Parsedown;
 use Illuminate\Support\Facades\DB;
+use Parsedown;
 
 class News extends Model
 {
@@ -43,12 +43,14 @@ class News extends Model
     }
 
     /**
-     * Получаем ... 
-     * 
+     * Получаем ...
+     *
      * @param type $query
+     *
      * @return type
      */
-    public function scopePartialContent($query) {
+    public function scopePartialContent($query)
+    {
         $cols = [
             'substr(content, 1, 300) as content',
             'id',
@@ -57,9 +59,9 @@ class News extends Model
             'created_at',
             'updated_at',
         ];
+
         return $query->select(
                 DB::raw(implode(',', $cols)))
                         ->orderBy('created_at', 'desk');
     }
-
 }

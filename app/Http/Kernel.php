@@ -58,6 +58,6 @@ class Kernel extends HttpKernel
         'throttle'            => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'accessRoleAdmin'     => \App\Http\Middleware\AccessAdminRoleMiddleware::class,
         'accessRoleModerator' => \App\Http\Middleware\AccessModeratorRoleMiddleware::class,
-        'gate' => \App\Http\Middleware\GateMiddleware::class,
+        'gate'                => \App\Http\Middleware\GateMiddleware::class,
     ];
 }
