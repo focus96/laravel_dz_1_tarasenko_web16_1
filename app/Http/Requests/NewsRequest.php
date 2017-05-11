@@ -69,9 +69,9 @@ class NewsRequest extends FormRequest
      *
      * @return bool
      */
-
-    public function authorizeUpdate() {
-        /**
+    public function authorizeUpdate()
+    {
+        /*
          * Проверка на авторство
          */
 //        (News::where('id', request()->id)
@@ -87,7 +87,7 @@ class NewsRequest extends FormRequest
     public function validateStore()
     {
         return [
-            'title' => 'required|unique:news', // не забываем проверять на уникальность
+            'title'   => 'required|unique:news', // не забываем проверять на уникальность
             'content' => 'required',
         ];
     }
@@ -101,7 +101,7 @@ class NewsRequest extends FormRequest
     {
         return [
 
-            'title' => 'required|unique:news,title,' . request()->news->id,
+            'title'   => 'required|unique:news,title,'.request()->news->id,
             'content' => 'required',
         ];
     }
