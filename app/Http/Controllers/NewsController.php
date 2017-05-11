@@ -7,7 +7,7 @@ use App\Models\News;
 use Auth;
 use Illuminate\Support\Facades\Cache;
 
-<<<<<<< HEAD
+
 class NewsController extends Controller {
 
     public function __construct() {
@@ -19,10 +19,6 @@ class NewsController extends Controller {
         ]);
     }
 
-=======
-class NewsController extends Controller
-{
->>>>>>> 9f3bbbc04b77e4380ebfc1a8e34c48941eccd494
     /**
      * Display a listing of the resource.
      *
@@ -34,16 +30,8 @@ class NewsController extends Controller
         //            return News::all();
         //        });
 
-<<<<<<< HEAD
         $news = News::partialContent()->paginate(10);
-=======
-        $news = News::select(
-                        DB::raw('substr(content, 1, 300) as content, '
-                                .'id, title, slug, created_at, updated_at'))
-                ->orderBy('created_at', 'desk')
-                ->paginate(10);
 
->>>>>>> 9f3bbbc04b77e4380ebfc1a8e34c48941eccd494
         return view('news.index', ['news' => $news]);
     }
 
