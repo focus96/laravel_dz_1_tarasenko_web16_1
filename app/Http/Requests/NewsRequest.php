@@ -2,24 +2,24 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Models\News;
+use Illuminate\Foundation\Http\FormRequest;
 
-class NewsRequest extends FormRequest {
-
+class NewsRequest extends FormRequest
+{
     /**
      * Allowed methods for the request.
-     * 
+     *
      * @var array
      */
     protected $allowedMethods = [
-        'store' => ['post'],
-        'update' => ['put', 'patch']
+        'store'  => ['post'],
+        'update' => ['put', 'patch'],
     ];
 
     /**
      * Current method.
-     * 
+     *
      * @var string|null
      */
     protected $currentMethod = null;
@@ -29,11 +29,11 @@ class NewsRequest extends FormRequest {
      *
      * @return bool
      */
-    public function authorize() {
-
+    public function authorize()
+    {
         if (in_array($this->currentMethod, $this->allowedMethods['store'])) {
             return $this->authorizeStore();
-        } else if (in_array($this->currentMethod, $this->allowedMethods['update'])) {
+        } elseif (in_array($this->currentMethod, $this->allowedMethods['update'])) {
             return $this->authorizeUpdate();
         }
     }
@@ -43,58 +43,63 @@ class NewsRequest extends FormRequest {
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         $this->currentMethod = \Illuminate\Support\Str::lower($this->getMethod());
 
         if (in_array($this->currentMethod, $this->allowedMethods['store'])) {
             return $this->validateStore();
-        } else if (in_array($this->currentMethod, $this->allowedMethods['update'])) {
+        } elseif (in_array($this->currentMethod, $this->allowedMethods['update'])) {
             return $this->validateUpdate();
         }
     }
 
     /**
      * Authorize for store.
-     * 
-     * @return boolean
+     *
+     * @return bool
      */
-    public function authorizeStore() {
+    public function authorizeStore()
+    {
         return true;
     }
 
     /**
      * Authorize for update.
-     * 
-     * @return boolean
+     *
+     * @return bool
      */
-    public function authorizeUpdate() {
+    public function authorizeUpdate()
+    {
         (News::where('id', request()->id)
                         ->where('user_id', auth()->id())->exists()) ? true : abort(403);
+
         return true;
     }
 
     /**
      * Validate POST request.
-     * 
+     *
      * @return array
      */
-    public function validateStore() {
+    public function validateStore()
+    {
         return [
-            'title' => 'required|unique:news', // не забываем проверять на уникальность
+            'title'   => 'required|unique:news', // не забываем проверять на уникальность
             'content' => 'required|max:10',
         ];
     }
 
     /**
      * Validate PUT, PATH request.
-     * 
+     *
      * @return array
      */
-    public function validateUpdate() {
+    public function validateUpdate()
+    {
         return [
-            'title' => 'required|unique:news,title,' . request()->id,
+            'title'   => 'required|unique:news,title,'.request()->id,
             'content' => 'required|max:10',
         ];
     }
-
 }

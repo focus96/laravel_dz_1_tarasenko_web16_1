@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable {
-
+class User extends Authenticatable
+{
     use Notifiable;
 
     /**
@@ -28,18 +28,22 @@ class User extends Authenticatable {
     ];
 
     /**
-     * Связь с таблицей ролей
+     * Связь с таблицей ролей.
+     *
      * @return type Model roles
      */
-    public function roles() {
+    public function roles()
+    {
         return $this->belongsToMany(Role::class);
     }
 
     /**
-     * Связь с таблицей новостей
+     * Связь с таблицей новостей.
+     *
      * @return type Model news
      */
-    public function news() {
+    public function news()
+    {
         return $this->hasMany(News::class);
     }
 }

@@ -2,25 +2,28 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use Auth;
+use Closure;
 
 class AccessAdminRoleMiddleware
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        $role = Auth::user()->roles()->value("slug");
-        if($role !== 'admin'){
+        $role = Auth::user()->roles()->value('slug');
+        if ($role !== 'admin') {
             abort(403, 'Unauthorized action.');
+
             return redirect('news');
         }
+
         return $next($request);
     }
 }
