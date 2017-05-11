@@ -26,7 +26,7 @@ class GateMiddleware {
             }
             
         }
-        //abort(403, 'Unauthorized action.');
+        abort(403, 'Unauthorized action.');
         return redirect('news');
     }
 
