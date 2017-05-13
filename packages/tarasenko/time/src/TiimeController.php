@@ -8,6 +8,11 @@ use Carbon\Carbon;
 class TimeController extends Controller
 {
 
+    /**
+     * Display index views
+     * 
+     * @return type \Illuminate\Http\Response
+     */
     public function index()
     {
         $currentTime = Carbon::now()->toDateTimeString();
