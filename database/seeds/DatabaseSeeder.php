@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
-
+use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -48,12 +47,11 @@ class DatabaseSeeder extends Seeder
                     'remember_token' => str_random(10),
         ])->roles()->sync([$roles[0]->id]);
 
-        
         factory(User::class, 1)->create([
             'email' => 'adminn@admin.ru',
         ])->first()->roles()->sync([$roles[0]->id]);
-        
-        /**
+
+        /*
          * Create moderator with my password
          */
         App\Models\User::create([
@@ -62,14 +60,14 @@ class DatabaseSeeder extends Seeder
                     'password'       => bcrypt('1234'),
                     'remember_token' => str_random(10),
         ])->roles()->sync([$roles[1]->id, $roles[0]->id]);
-        
+
         // 1 2 3 4 5
         // sync([2,3])
         // 2 3
         // sync([1,4,5], false)
         // 1 4 5 2 3
-        
-        /**
+
+        /*
          * Creating users with different roles.
          */
         factory('App\Models\User')->create()
