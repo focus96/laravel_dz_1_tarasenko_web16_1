@@ -144,6 +144,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        Tarasenko\Time\TimeServiceProvider::class,
         /*
          * Application Service Providers...
          */

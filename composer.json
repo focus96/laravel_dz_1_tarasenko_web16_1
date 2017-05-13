@@ -22,7 +22,8 @@
             "database"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Tarasenko\\Time\\": "packages/tarasenko/time/src"
         }
     },
     "autoload-dev": {

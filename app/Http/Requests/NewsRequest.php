@@ -100,7 +100,6 @@ class NewsRequest extends FormRequest
     public function validateUpdate()
     {
         return [
-
             'title' => 'required|unique:news,title,' . request()->news->id,
             'content' => 'required',
         ];

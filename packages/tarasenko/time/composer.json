@@ -1,0 +1,12 @@
+{
+    "name": "tarasenko/time",
+    "description": "Display the remaining time until the next summer",
+    "authors": [
+        {
+            "name": "Tarasenko Evgenii",
+            "email": "tjm-photo@mail.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
